@@ -1,0 +1,8 @@
+Entender o conceito em:
+
+https://www.quora.com/How-do-I-develop-a-chatbot-using-Python-without-any-frameworks
+
+
+Chatterbot:
+
+https://pt.linkedin.com/pulse/construindo-um-chatbot-em-10-minutos-python-rodrigo-correa
