@@ -1,0 +1,25 @@
+import cv2
+import os
+
+def preparar_modelo(path_dataset):
+detector_face = cv2.CascadeClassifier(cv2.data.haarcascades + 'haarcascade_frontalface_default.xml')
+reconhecedor = cv2.face.LBPHFaceRecognizer_create()
+
+faces_conhecidas = []
+IDs = []
+
+for diretorio, subdirs, arquivos in os.walk(path_dataset):
+for arquivo in arquivos:
+if arquivo.startswith("."):
+continue
+caminho_img = os.path.join(diretorio, arquivo)
+label = os.path.basename(diretorio)
+imagem = cv2.imread(caminho_img, cv2.IMREAD_GRAYSCALE)
+faces = detector_face.detectMultiScale(imagem, scaleFactor=1.1, minNeighbors=5)
+
+for (x, y, w, h) in faces:
+faces_conhecidas.append(imagem[y:y + h, x:x + w])
+IDs.append(int(label))
+
+reconhecedor.train(faces_conhecidas, np.array(IDs))
+return reconhecedor
